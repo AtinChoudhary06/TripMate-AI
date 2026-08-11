@@ -28,8 +28,6 @@ COPY . .
 # directly). app.py's JSON API is the alternative surface for
 # programmatic/HTTP clients — run it instead with:
 #   docker run -p 8000:8000 <image> uvicorn app:app --host 0.0.0.0 --port 8000
-EXPOSE 8501
+EXPOSE 8000
 
-# Azure App Service for Containers routes traffic to the port set in the
-# WEBSITES_PORT app setting; keep this in sync with that value (8501).
-CMD ["streamlit", "run", "streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
